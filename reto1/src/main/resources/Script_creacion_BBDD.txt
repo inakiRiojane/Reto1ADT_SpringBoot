@@ -1,0 +1,60 @@
+DROP DATABASE IF EXISTS reto_uno;
+CREATE DATABASE reto_uno;
+USE reto_uno;
+
+CREATE TABLE users(
+id INT PRIMARY KEY AUTO_INCREMENT,
+login_user varchar(100) UNIQUE NOT NULL,
+nombre VARCHAR(50) NOT NULL,
+apellidos VARCHAR(100) NOT NULL,
+email VARCHAR(100) UNIQUE NOT NULL,
+password VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE songs(
+id INT PRIMARY KEY AUTO_INCREMENT,
+titulo VARCHAR(100) NOT NULL,
+autor VARCHAR(100) NOT NULL,
+url VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE favorites(
+id_user INT,
+id_song INT,
+
+CONSTRAINT pk_favorites PRIMARY KEY(id_user, id_song),
+CONSTRAINT fk_users FOREIGN KEY(id_user) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
+CONSTRAINT fk_songs FOREIGN KEY(id_song) REFERENCES songs(id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+INSERT INTO users (login_user, nombre, apellidos, email, password) VALUES ("Inaki", "Inaki", "Rioja", "Inaki@inaki.com", 123456), ("Adrian", "Adrian", "Gonzalez", "adrian@adrian.com", 654321), ("Fabiana", "Fabiana", "Silva", "fabiana@fabiana.com", 987456),
+	("Javier", "Javier", "Baz", "javier@javier.com", 654789);
+    
+INSERT INTO songs (titulo, autor, url) VALUES ("Bad Omens", "5 Seconds of Summer", "https://www.youtube.com/watch?v=SJYO0p8CpQc"),
+("TV", "Billie Elish", "https://www.youtube.com/watch?v=UQphbBmXI-E"),
+("Selfish Soul", "Sudan Archives", "https://www.youtube.com/watch?v=D0XUbMk8A94"),
+("Duki", "She Don't Give a FO", "https://www.youtube.com/watch?v=W0yp3rSfx3I"),
+("Passion", "Wade", "https://www.youtube.com/watch?v=7BXREa9W6v8"),
+("AMORFODA", "Bad Bunny", "https://www.youtube.com/watch?v=kLpH1nSLJSs"),
+("Vino Tinto", "Estopa", "https://www.youtube.com/watch?v=NOjgze5Nmzc"),
+("Calle La Pantomima", "Melendi", "https://www.youtube.com/watch?v=LSnpHFTp7Nw"),
+("La Bachata", "Manuel Turizo", "https://www.youtube.com/watch?v=SmMR3XHlJSU"),
+("Efecto", "Bad Bunny", "https://www.youtube.com/watch?v=yO-XR4qXm1k"),
+("WHAT TO DO?", "Jackboys, Travis Scott", "https://www.youtube.com/watch?v=oQ09Bw2Q4nI"),
+("Violines", "Fatima Hajji", "https://www.youtube.com/watch?v=xdbvoxBojFg"),
+("Simpsomnia", "Cristobal Chaves", "https://www.youtube.com/watch?v=_abaA-RjHh0"),
+("La Rave", "Lous", "https://www.youtube.com/watch?v=7hu6zaMPM88"),
+("Trip To Ireland", "Dr. Peacock", "https://www.youtube.com/watch?v=GvrvQTUbUcA"),
+("Fanatica Sensual", "Plan B", "https://www.youtube.com/watch?v=QvypZSdjO8M"),
+("Sabado Rebelde", "Daddy Yankee FT Plan B", "https://www.youtube.com/watch?v=0nPkXDrL2ZU"),
+("Reggaeton", "Jowell y Randy", "https://www.youtube.com/watch?v=EAJZWCwpi5g"),
+("Deep Jungle Walk", "Astrix", "https://www.youtube.com/watch?v=xw3C03Ba8Dk"),
+("Codeine", "Mandragora", "https://www.youtube.com/watch?v=csOZutpHDyc"),
+("Free Tibet (Vini Vici Remix)", "Hilight Tribe", "https://www.youtube.com/watch?v=COOJUh2whcI"),
+("Oh Ohh", "Debora De Luca", "https://www.youtube.com/watch?v=V05MQfC7aqA"),
+("Guitar Spell", "DJ Sylvan", "https://www.youtube.com/watch?v=JYFDLCyBEK8"),
+("Jaguar", "CArl Cox", "https://www.youtube.com/watch?v=Kbc81hmho44"),
+("Krichi", "Legit Trip", "https://www.youtube.com/watch?v=jb3-_C_kCFs"),
+("Never Return", "Legit Trip", "https://www.youtube.com/watch?v=NJKqaog2tkQ");
+    
+INSERT INTO favorites VALUES (1, 1), (1, 3), (2, 1), (2, 2), (3, 3), (4, 2), (4, 3);	
